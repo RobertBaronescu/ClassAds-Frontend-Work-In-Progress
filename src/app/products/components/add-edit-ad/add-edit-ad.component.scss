@@ -1,0 +1,86 @@
+.add-new {
+  margin-bottom: 0;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #4e66f8 !important;
+  font-weight: 900;
+}
+
+h4 {
+  font-weight: 900;
+}
+
+.form-label {
+  color: #868e96;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.text-muted {
+  color: #868e96;
+}
+
+.form-block {
+  padding-bottom: 4rem;
+  border-bottom: 1px solid #e9ecef;
+  padding-top: 4rem;
+}
+
+.input-items {
+  width: 2rem;
+  border-color: transparent;
+  margin-left: 0.6rem;
+  margin-right: 0.6rem;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+  background: #fff;
+}
+
+.btn.btn-items {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  letter-spacing: 0;
+  font-weight: normal;
+  padding: 0;
+  border: solid 1px #4e66f8;
+  text-align: center;
+  color: #4e66f8;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.final-form-block {
+  border: none;
+}
+
+.finish-btn {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: #fff;
+  background-color: #4e66f8;
+  border-color: #4e66f8;
+}
+
+.finish-btn:hover {
+  background-color: #2c48ff;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+ngx-dropzone {
+  height: 190px;
+}

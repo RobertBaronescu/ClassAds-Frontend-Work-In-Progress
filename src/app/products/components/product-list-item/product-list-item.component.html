@@ -1,0 +1,37 @@
+<div class="card overflow-hidden mb-3">
+  <div class="ribbon ribbon-top-left text-danger"></div>
+  <div class="d-md-flex">
+    <div class="item-card9-img" (click)="redirectToAd(ad?._id)">
+      <img [src]="ad?.thumbnail" alt="img" class="cover-image" />
+    </div>
+    <div class="card border-0 mb-0 w-100">
+      <div class="card-body">
+        <div class="item-card9">
+          <div
+            class="item-card9-icons"
+            *ngIf="userService.currentUser$.getValue()"
+          >
+            <i
+              class="fa fa fa-heart-o"
+              (click)="addToWishlist()"
+              *ngIf="userService.currentUser$.getValue()._id !== ad?.userId"
+            ></i>
+          </div>
+          <h5 class="font-weight-semibold mt-1">{{ ad?.title }}</h5>
+          <p class="mb-0 leading-tight text-muted">
+            {{ ad?.description }}
+          </p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="item-card9-footer d-flex">
+          <div class="item-card9-cost">
+            <h4 class="text-dark font-weight-semibold mb-0 mt-0 ad-price">
+              ${{ ad?.price }}
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

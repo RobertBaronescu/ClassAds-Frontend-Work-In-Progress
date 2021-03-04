@@ -1,0 +1,80 @@
+<section class="slice mb-5">
+  <div class="container">
+    <div class="row row-grid">
+      <div class="col-lg-6">
+        <div
+          id="carouselExampleControls"
+          class="carousel slide"
+          data-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                class="d-block w-100 carousel-photo"
+                [src]="ad?.photos[0]"
+                alt="First slide"
+              />
+            </div>
+            <div
+              class="carousel-item"
+              *ngFor="let photo of ad?.photos.slice(1)"
+            >
+              <img class="d-block w-100 carousel-photo" [src]="photo" alt="" />
+            </div>
+          </div>
+          <a
+            class="carousel-control-prev"
+            href="#carouselExampleControls"
+            role="button"
+            data-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a
+            class="carousel-control-next"
+            href="#carouselExampleControls"
+            role="button"
+            data-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="pl-lg-5">
+          <h5 class="h4">{{ ad?.title }}</h5>
+
+          <div class="row align-items-center">
+            <div class="col-6">
+              <span class="static-rating static-rating-sm d-block"
+                ><i class="fas fa-eye"></i> : {{ ad?.views }}
+              </span>
+            </div>
+            <div class="col-6 text-right">
+              <ul class="list-inline mb-0 d-flex">
+                <li class="list-inline-item">
+                  <span class="badge badge-pill badge-soft-info"
+                    >ID: #{{ ad?._id }}</span
+                  >
+                </li>
+                <li class="list-inline-item">
+                  <span class="badge badge-pill badge-soft-success"
+                    >Sponsored: {{ ad?.sponsored }}</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="py-4 my-4 border-top border-bottom">
+            <h6 class="text-sm">Description:</h6>
+            <p class="text-sm mb-0 product-description">
+              {{ ad?.description }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

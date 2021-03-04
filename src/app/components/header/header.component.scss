@@ -1,0 +1,17 @@
+.nav-link {
+  color: #4e66f8 !important;
+  font-weight: bold;
+  &:hover {
+    color: rgba(0, 0, 0, 0.9) !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .home-locations {
+    flex-direction: column;
+    align-items: center;
+  }
+  .nav-list {
+    justify-content: flex-end;
+  }
+}

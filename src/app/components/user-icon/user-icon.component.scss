@@ -1,0 +1,105 @@
+.user-icon {
+  display: inline-block;
+  object-fit: cover;
+  width: 3rem;
+  height: 3rem;
+  text-align: center;
+
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 1rem rgb(0 0 0 / 15%);
+  line-height: 3rem;
+  border: solid 2px #fff;
+  opacity: 1;
+}
+
+.log-in {
+  color: #4e66f8;
+  font-weight: bold !important;
+}
+
+.log-in:hover {
+  text-decoration: none;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.dropdown-item {
+  color: #4e66f8;
+  
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.log-out {
+  color: red;
+}
+
+.user-icon:hover {
+  opacity: 0.7;
+  transition: all ease-in-out 0.3s;
+  cursor: pointer;
+}
+
+.dropdown-menu.show {
+  border-radius: 15px;
+}
+
+.dropdown-toggle::before {
+  content: none;
+}
+
+.user-info:hover {
+  opacity: 0.7;
+  transition: all ease-in-out 0.3s;
+  cursor: pointer;
+}
+
+.btn {
+  letter-spacing: 0.1em;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #4e66f8;
+  border-color: #4e66f8;
+
+  &:hover {
+    background-color: #3752fd;
+    border-color: #3752fd;
+    color: #fff;
+  }
+}
+
+.account-sign-out {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .dropleft {
+    display: none !important;
+  }
+
+  .account-sign-out {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+  }
+}
+
+.wishlist-length {
+  background: linear-gradient(to right, #4a60c1, #3985e0);
+  font-size: 80%;
+  font-weight: 700;
+  line-height: 18px;
+  vertical-align: middle;
+  min-width: 18px;
+  height: 18px;
+  text-align: center;
+  display: inline-block;
+  color: #fff;
+  border-radius: 9px;
+}

@@ -1,0 +1,82 @@
+#file-1 {
+  display: none;
+}
+
+.btn {
+  position: relative;
+  transition: all 0.2s ease;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  color: #fff;
+  background-color: #6e00ff;
+  border-color: #6e00ff;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 15%);
+  &:hover {
+    background-color: #8830fc;
+  }
+}
+
+.btn:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+.cancel-button {
+  background-color: transparent;
+  color: #000;
+  border: none;
+  opacity: 1;
+  &:hover {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    opacity: 0.8;
+    text-decoration: none;
+  }
+}
+
+.bg-gradient-warning {
+  background: linear-gradient(50deg, #ffab00 0, #fff800 100%) !important;
+}
+
+.avatar-lg {
+  width: 75px;
+  height: 75px;
+  font-size: 1.25rem;
+  border-radius: 50% !important;
+  object-fit: cover;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.user-action {
+  color: #000;
+}
+
+.fas {
+  color: #6e00ff;
+}
+
+.card-header {
+  padding: 1rem 1.5rem;
+  margin-bottom: 0;
+  background-color: transparent;
+}
+
+.image-btn {
+  background: transparent;
+  color: black;
+  border: none !important;
+  padding: 3px;
+  margin-left: 4px;
+
+  &:hover {
+    color: #fff;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+  }
+}

@@ -1,0 +1,35 @@
+<div class="container">
+  <h2>Wishlist</h2>
+  <span
+    >You have <strong>{{ wishlistAds?.length }}</strong> item(s) in your
+    wishlist</span
+  >
+
+  <div class="card mb-5 mt-5" *ngFor="let product of wishlistAds">
+    <div class="row no-gutters">
+      <div
+        class="col-md-4 product-image"
+        (click)="redirectToSingleProduct(product?._id)"
+      >
+        <img [src]="product.thumbnail" class="card-img" alt="..." />
+      </div>
+      <div class="col-md-8">
+        <div class="card-body product-description">
+          <div class="title-text">
+            <h5 class="card-title">{{ product?.title }}</h5>
+            <p class="card-text text-muted">
+              {{ product?.description }}
+            </p>
+          </div>
+          <div class="card-body price font-weight-bold">
+            <span>{{ product?.price | currency }}</span>
+          </div>
+
+          <div>
+            <i class="fas fa-times close-card" (click)="closeCard(product)"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

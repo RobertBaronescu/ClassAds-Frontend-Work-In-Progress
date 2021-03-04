@@ -1,0 +1,218 @@
+<section class="py-5">
+  <div class="container">
+    <p class="subtitle text-primary add-new mb-5">Add new listing</p>
+    <form [formGroup]="addAdForm" (ngSubmit)="formSubmit()" *ngIf="addAdForm">
+      <div class="row form-block mb-5">
+        <div class="col-lg-4">
+          <h4>Basic</h4>
+        </div>
+        <div class="col-lg-7 ml-auto">
+          <div class="form-group">
+            <label class="form-label" for="form_name">Title</label>
+            <input
+              formControlName="title"
+              class="form-control"
+              name="name"
+              id="form_name"
+            />
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="
+                addAdForm.controls.title?.invalid &&
+                (addAdForm.controls.title?.dirty ||
+                  addAdForm.controls.title?.touched)
+              "
+            >
+              <div *ngIf="addAdForm.controls.title?.errors?.required">
+                Ad title is required.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row form-block mb-5">
+        <div class="col-lg-4">
+          <h4>Category</h4>
+        </div>
+        <div class="col-lg-7 ml-auto">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="form-label" for="form_city">Category</label>
+                <select
+                  name="city"
+                  formControlName="category"
+                  id="form_city"
+                  class="form-control"
+                >
+                  <option
+                    *ngFor="let category of categories"
+                    [value]="category?.name"
+                  >
+                    {{ category?.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row form-block mb-5">
+        <div class="col-lg-4">
+          <h4>Description</h4>
+        </div>
+        <div class="col-lg-7 ml-auto">
+          <div class="form-group mb-5">
+            <label class="form-label" for="form_description"
+              >Describe what you are selling</label
+            >
+            <textarea
+              class="form-control"
+              name="name"
+              id="form_description"
+              rows="5"
+              aria-describedby="descriptionHelp"
+              formControlName="description"
+            ></textarea>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="
+                addAdForm.controls.description?.invalid &&
+                (addAdForm.controls.description?.dirty ||
+                  addAdForm.controls.description?.touched)
+              "
+            >
+              <div *ngIf="addAdForm.controls.description?.errors?.required">
+                Description is required.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-block mb-5">
+        <div class="col-lg-4">
+          <h4>Price</h4>
+        </div>
+        <div class="col-lg-7 ml-auto">
+          <div class="form-group">
+            <label class="form-label" for="room-price">Item price</label>
+            <input
+              formControlName="price"
+              class="form-control"
+              name="price"
+              id="room-price"
+              type="number"
+            />
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="
+                addAdForm.controls.price?.invalid &&
+                (addAdForm.controls.price?.dirty ||
+                  addAdForm.controls.price?.touched)
+              "
+            >
+              <div *ngIf="addAdForm.controls.price?.errors?.required">
+                Price is required.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-block mb-5">
+        <div class="col-lg-4">
+          <h4>Image upload</h4>
+        </div>
+        <div class="col-lg-7 ml-auto">
+          <div class="form-group">
+            <ngx-dropzone
+              (change)="onThumbnailSelect($event)"
+              [multiple]="false"
+            >
+              <ngx-dropzone-label
+                >Upload your thumbnail image!</ngx-dropzone-label
+              >
+              <ngx-dropzone-image-preview
+                ngProjectAs="ngx-dropzone-preview"
+                *ngFor="let f of thumbnailFiles"
+                [file]="f"
+                [removable]="true"
+                (removed)="onThumbnailRemove(f)"
+              >
+              </ngx-dropzone-image-preview>
+            </ngx-dropzone>
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="
+                addAdForm.controls.thumbnail?.invalid &&
+                (addAdForm.controls.thumbnail?.dirty ||
+                  addAdForm.controls.thumbnail?.touched)
+              "
+            >
+              <div *ngIf="addAdForm.controls.thumbnail?.errors?.required">
+                Room image is required.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-block mb-5">
+        <div class="col-lg-4">
+          <h4>Photos</h4>
+        </div>
+        <div class="col-lg-7 ml-auto">
+          <div class="form-group">
+            <ngx-dropzone (change)="onSelect($event)">
+              <ngx-dropzone-label>Upload your images!</ngx-dropzone-label>
+              <ngx-dropzone-image-preview
+                ngProjectAs="ngx-dropzone-preview"
+                *ngFor="let f of files"
+                [file]="f"
+                [removable]="true"
+                (removed)="onRemove(f)"
+              >
+              </ngx-dropzone-image-preview>
+            </ngx-dropzone>
+          </div>
+        </div>
+      </div>
+      <div class="row form-block mb-5">
+        <div class="col-lg-4">
+          <h4>Sponsored</h4>
+        </div>
+        <div class="col-lg-7 ml-auto">
+          <div class="form-group">
+            <select
+              name="sponsored"
+              id="sponsored"
+              class="form-control"
+              formContorlName="sponsored"
+              (change)="onChange($event.target.value)"
+            >
+              <option [value]="boolean" *ngFor="let boolean of booleanArray">
+                {{ boolean }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row form-block flex-column flex-sm-row final-form-block">
+        <div class="col text-center text-sm-right">
+          <button
+            type="submit"
+            class="btn btn-primary px-3 finish-btn"
+            [disabled]="!addAdForm.valid"
+          >
+            Finish<i class="fa-chevron-right fa ml-2"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

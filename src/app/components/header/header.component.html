@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
+  <div class="container-fluid">
+    <img
+      src="../../../assets/photos/logo/77b4cfa9-5ec3-4214-880d-c244bcb24aa1_200x200.png"
+      alt="Directory logo"
+      class="mr-3"
+      style="height: 55px; width: 70px"
+    />
+
+    <button
+      class="navbar-toggler navbar-toggler-right"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarCollapse"
+      aria-controls="navbarCollapse"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fa fa-bars"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul
+        class="navbar-nav align-items-center w-100 justify-content-between nav-list"
+      >
+        <div class="d-flex home-locations">
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="/"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+
+          <!-- <li class="nav-item">
+            <a class="nav-link" routerLink="/location/list">Locations</a>
+          </li> -->
+        </div>
+        <div>
+          <li class="nav-item">
+            <app-user-icon></app-user-icon>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </div>
+</nav>

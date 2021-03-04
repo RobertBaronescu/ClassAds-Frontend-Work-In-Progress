@@ -1,0 +1,205 @@
+<div class="container d-flex align-items-center sign-up-container">
+  <div class="col">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div>
+          <div class="mb-5 text-center">
+            <h6 class="h3">Create account</h6>
+            <p class="text-muted mb-0">Register a new account</p>
+          </div>
+          <span class="clearfix"></span>
+          <form [formGroup]="signOutForm" (ngSubmit)="registerUser()">
+            <div class="form-group">
+              <label class="form-control-label">Name</label>
+              <div class="input-group input-group-merge">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fas fa-user"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="input-name"
+                  placeholder="John Doe"
+                  required
+                  formControlName="name"
+                />
+                <div
+                  class="alert alert-danger mt-2 w-100"
+                  role="alert"
+                  *ngIf="
+                    signOutForm.get('name')?.invalid &&
+                    (signOutForm.get('name')?.dirty ||
+                      signOutForm.get('name')?.touched)
+                  "
+                >
+                  <div *ngIf="signOutForm.get('name')?.errors?.required">
+                    Name is required.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Email address</label>
+              <div class="input-group input-group-merge">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fas fa-user"></i
+                  ></span>
+                </div>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="input-email"
+                  placeholder="name@example.com"
+                  required
+                  formControlName="email"
+                />
+                <div
+                  class="alert alert-danger mt-2 w-100"
+                  role="alert"
+                  *ngIf="
+                    signOutForm.get('email')?.invalid &&
+                    (signOutForm.get('email')?.dirty ||
+                      signOutForm.get('email')?.touched)
+                  "
+                >
+                  <div *ngIf="signOutForm.get('email')?.errors?.required">
+                    E-mail is required.
+                  </div>
+                  <div *ngIf="signOutForm.get('email')?.errors?.email">
+                    Please provide a valid e-mail address.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Phone</label>
+              <div class="input-group input-group-merge">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fas fa-phone"></i
+                  ></span>
+                </div>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="input-phone"
+                  placeholder="07XX-XXX-XXX"
+                  required
+                  formControlName="phone"
+                />
+                <div
+                  class="alert alert-danger mt-2 w-100"
+                  role="alert"
+                  *ngIf="
+                    signOutForm.get('email')?.invalid &&
+                    (signOutForm.get('email')?.dirty ||
+                      signOutForm.get('email')?.touched)
+                  "
+                >
+                  <div *ngIf="signOutForm.get('email')?.errors?.required">
+                    E-mail is required.
+                  </div>
+                  <div *ngIf="signOutForm.get('email')?.errors?.email">
+                    Please provide a valid e-mail address.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group mb-4">
+              <label class="form-control-label">Password</label>
+              <div class="input-group input-group-merge">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fas fa-key"></i
+                  ></span>
+                </div>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="input-password"
+                  placeholder="********"
+                  formControlName="password"
+                />
+                <div
+                  class="alert alert-danger mt-2 w-100"
+                  role="alert"
+                  *ngIf="
+                    signOutForm.controls.password?.invalid &&
+                    (signOutForm.controls.password?.dirty ||
+                      signOutForm.controls.password?.touched)
+                  "
+                >
+                  <div *ngIf="signOutForm.controls.password?.errors?.required">
+                    Password is required.
+                  </div>
+                  <div *ngIf="signOutForm.controls.password?.errors?.minlength">
+                    Password must be at least 6 characters.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Confirm password</label>
+              <div class="input-group input-group-merge">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fas fa-key"></i
+                  ></span>
+                </div>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="input-password-confirm"
+                  placeholder="********"
+                  formControlName="confirmedPassword"
+                />
+                <div
+                  class="alert alert-danger w-100 mt-2"
+                  role="alert"
+                  *ngIf="
+                    signOutForm.controls.confirmedPassword?.invalid &&
+                    (signOutForm.controls.confirmedPassword?.dirty ||
+                      signOutForm.controls.confirmedPassword?.touched)
+                  "
+                >
+                  <div
+                    *ngIf="
+                      signOutForm.controls.confirmedPassword?.errors?.required
+                    "
+                  >
+                    Password is required.
+                  </div>
+                  <div
+                    *ngIf="
+                      signOutForm.controls.confirmedPassword?.errors?.mustMatch
+                    "
+                  >
+                    Password must match.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <button
+                type="submit"
+                class="btn btn-block btn-primary"
+                [disabled]="!signOutForm.valid"
+              >
+                Create my account
+              </button>
+            </div>
+          </form>
+          <div class="mt-4 text-center">
+            <small>Already have an acocunt?</small>
+            <a routerLink="/login" class="small font-weight-bold ml-2"
+              >Sign in</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

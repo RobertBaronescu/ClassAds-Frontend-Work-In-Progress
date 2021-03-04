@@ -1,0 +1,240 @@
+<section class="slice">
+  <div class="container">
+    <div class="row row-grid">
+      <div class="col-lg-9 order-lg-2">
+        <!-- Change avatar -->
+        <div class="card bg-gradient-warning hover-shadow-lg">
+          <div class="card-body py-3">
+            <div class="row row-grid align-items-center">
+              <div class="col-lg-9">
+                <div class="media align-items-center">
+                  <img
+                    alt="Image placeholder"
+                    [src]="user?.picture"
+                    (click)="chooseFile(fileInput)"
+                    class="avatar-lg"
+                  />
+
+                  <div class="media-body">
+                    <h5 class="text-white mb-0 ml-2">{{ user?.name }}</h5>
+                    <div>
+                      <form [formGroup]="imageForm" (ngSubmit)="changePhoto()">
+                        <input
+                          type="file"
+                          name="file-1[]"
+                          id="file-1"
+                          class="custom-input-file custom-input-file-link"
+                          #fileInput
+                          (change)="onImagePicked($event)"
+                          required
+                        />
+                        <button
+                          *ngIf="imageChanger"
+                          type="submit"
+                          class="btn btn-warning image-btn"
+                          [disabled]="!imageForm.valid"
+                        >
+                          Change photo
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <button
+                  class="btn btn-info"
+                  (click)="redirectToAddProduct()"
+                >
+                  Add a new item
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- General information form -->
+        <div class="actions-toolbar py-2 mb-4">
+          <h5 class="mb-1 mt-5">General information</h5>
+        </div>
+        <form [formGroup]="userForm" (ngSubmit)="userFormSubmit()">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="form-control-label">Name</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="Enter your name"
+                  formControlName="name"
+                  required
+                />
+                <div
+                  class="alert alert-danger mt-2"
+                  role="alert"
+                  *ngIf="
+                    userForm.get('name')?.invalid &&
+                    (userForm.get('name')?.dirty ||
+                      userForm.get('name')?.touched)
+                  "
+                >
+                  <div *ngIf="userForm.get('name')?.errors?.required">
+                    Name is required.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Email</label>
+                <input
+                  class="form-control"
+                  type="email"
+                  placeholder="name@exmaple.com"
+                  formControlName="email"
+                  required
+                />
+                <div
+                  class="alert alert-danger mt-2"
+                  role="alert"
+                  *ngIf="
+                    userForm.get('email')?.invalid &&
+                    (userForm.get('email')?.dirty ||
+                      userForm.get('email')?.touched)
+                  "
+                >
+                  <div *ngIf="userForm.get('email')?.errors?.required">
+                    E-mail is required.
+                  </div>
+                  <div *ngIf="userForm.get('email')?.errors?.email">
+                    Please provide a valid e-mail address.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-control-label">Phone</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="+40-777 245 549"
+                  formControlName="phone"
+                  required
+                />
+                <div
+                  class="alert alert-danger mt-2"
+                  role="alert"
+                  *ngIf="
+                    userForm.get('phone')?.invalid &&
+                    (userForm.get('phone')?.dirty ||
+                      userForm.get('phone')?.touched)
+                  "
+                >
+                  <div *ngIf="userForm.get('phone')?.errors?.required">
+                    Phone number is required.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Address -->
+          <!-- <div class="pt-5 mt-5 delimiter-top">
+            <div class="actions-toolbar py-2 mb-4">
+              <h5 class="mb-1">Address details</h5>
+              <p class="text-sm text-muted mb-0">
+                Fill in your address info for upcoming orders or payments.
+              </p>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-control-label">Address</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Enter your home address"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-control-label">City</label>
+                  <input class="form-control" type="text" placeholder="City" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group focused">
+                  <label class="form-control-label">Country</label>
+                  <select
+                    class="form-control select2-hidden-accessible"
+                    data-toggle="select"
+                    title="Country"
+                    data-live-search="true"
+                    data-live-search-placeholder="Country"
+                    data-select2-id="4"
+                    tabindex="-1"
+                    aria-hidden="true"
+                  >
+                    <option data-select2-id="6">Romania</option>
+                    <option>United Stated</option>
+                    <option>France</option>
+                    <option>Greece</option>
+                    <option>Italy</option>
+                    <option>Norway</option></select
+                  ><span
+                    class="select2 select2-container select2-container--default"
+                    dir="ltr"
+                    data-select2-id="5"
+                    style="width: 397.5px"
+                    ><span class="selection"
+                      ><span
+                        class="select2-selection select2-selection--single"
+                        role="combobox"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        title="Country"
+                        tabindex="0"
+                        aria-disabled="false"
+                        aria-labelledby="select2-08tw-container"
+                        ><span
+                          class="select2-selection__arrow"
+                          role="presentation"
+                          ><b role="presentation"></b></span></span></span
+                    ><span class="dropdown-wrapper" aria-hidden="true"></span
+                  ></span>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+          <!-- Save changes buttons -->
+          <div class="pt-5 mt-5 delimiter-top text-center mb-5">
+            <button
+              type="submit"
+              class="btn btn-sm btn-primary"
+              [disabled]="!userForm.valid"
+            >
+              Save changes
+            </button>
+            <button
+              type="button"
+              class="btn btn-link text-muted cancel-button"
+              (click)="resetForm()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-3 order-lg-1">
+        <app-user-settings></app-user-settings>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4" *ngFor="let ad of userAds">
+      <div class="card hover-shadow-lg hover-translate-y-n10">
+        <div class="card-header" (click)="redirectToAd(ad?._id)">
+          <div class="d-flex justify-content-center align-items-center">
+            <div>
+              <h6 class="mb-0" style="color: #6e00ff">{{ ad?.title }}</h6>
+            </div>
+          </div>
+        </div>
+        <div class="card-body text-center">
+          <img alt="Image placeholder" [src]="ad?.thumbnail" class="" />
+
+          <div class="mt-4 pt-4 delimiter-top">
+            <a class="btn btn-sm btn-light btn-icon-only mr-2">
+              <span class="btn-inner--icon"
+                ><i class="fas fa-edit" (click)="redirectToEditAdd(ad?._id)"></i
+              ></span>
+            </a>
+
+            <a class="btn btn-sm btn-danger btn-icon-only">
+              <span class="btn-inner--icon"
+                ><i class="fas fa-trash-alt" (click)="deleteAd(ad?._id)"></i
+              ></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
