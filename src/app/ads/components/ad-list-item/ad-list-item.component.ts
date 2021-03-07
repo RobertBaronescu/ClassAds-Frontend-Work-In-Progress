@@ -2,16 +2,17 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ad } from 'src/app/interfaces/ad.interface';
 import { AdService } from 'src/app/services/ad.service';
-import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-product-list-item',
-  templateUrl: './product-list-item.component.html',
-  styleUrls: ['./product-list-item.component.scss'],
+  selector: 'app-ad-list-item',
+  templateUrl: './ad-list-item.component.html',
+  styleUrls: ['./ad-list-item.component.scss'],
 })
-export class ProductListItemComponent implements OnInit {
+export class AdListItemComponent implements OnInit {
   @Input() ad: Ad;
+
+  wishlist: string[];
 
   constructor(
     private router: Router,
@@ -21,11 +22,12 @@ export class ProductListItemComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.userService.currentUser$.getValue()) {
+      this.wishlist = this.userService.currentUser$.getValue().wishlist;
     }
   }
 
   redirectToAd(adId: string) {
-    this.router.navigate([`/product/${adId}`]);
+    this.router.navigate([`/ads/${adId}`]);
   }
 
   addToWishlist() {

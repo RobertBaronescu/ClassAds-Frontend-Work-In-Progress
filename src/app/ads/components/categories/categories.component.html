@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-header"><h3 class="card-title">Categories</h3></div>
+  <div class="card-body">
+    <div class="closed" id="container" style="height: 250px; overflow: hidden">
+      <div class="filter-product-checkboxs">
+        <label
+          class="custom-control custom-checkbox mb-3"
+          *ngFor="let subcategory of subcategories"
+        >
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            name="checkbox1"
+            [value]="subcategory?.name"
+            (change)="checkSubcategory($event)"
+          />
+          <span class="custom-control-label">
+            <a href="#" class="text-dark">{{ subcategory?.name }}</a>
+          </span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="card-header border-top">
+    <h3 class="card-title">Price Range</h3>
+  </div>
+  <div class="card-body"></div>
+</div>

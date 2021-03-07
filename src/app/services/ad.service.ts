@@ -1,7 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { Ad } from '../interfaces/ad.interface';
+import { AdsResponse } from '../interfaces/ads-response.interface';
 import { Category } from '../interfaces/category.interface';
 
 @Injectable({
@@ -9,6 +11,7 @@ import { Category } from '../interfaces/category.interface';
 })
 export class AdService {
   currentAdId$ = new BehaviorSubject<string>(null);
+  params = { offset: '', ids: [], subcategories: [] };
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -18,8 +21,18 @@ export class AdService {
 
   constructor(private http: HttpClient) {}
 
-  getAdsByCategory(categoryId: string): Observable<Ad[]> {
-    return this.http.get<Ad[]>(`http://localhost:3000/ads/${categoryId}`);
+  getAdsByCategory(
+    categoryId: string,
+    pageOffset: number = 0,
+    params?: any
+  ): Observable<AdsResponse> {
+    this.params.offset = String(pageOffset);
+    this.params.ids = ['1', '2'];
+
+    return this.http.get<AdsResponse>(
+      `http://localhost:3000/ads/${categoryId}`,
+      { params: this.params }
+    );
   }
 
   getAdsByUser(userId: string): Observable<Ad[]> {

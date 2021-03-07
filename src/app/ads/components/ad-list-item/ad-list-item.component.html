@@ -12,7 +12,11 @@
             *ngIf="userService.currentUser$.getValue()"
           >
             <i
-              class="fa fa fa-heart-o"
+              [ngClass]="{
+                fas: wishlist.includes(ad?._id),
+                far: !wishlist.includes(ad?._id)
+              }"
+              class="fa-heart"
               (click)="addToWishlist()"
               *ngIf="userService.currentUser$.getValue()._id !== ad?.userId"
             ></i>

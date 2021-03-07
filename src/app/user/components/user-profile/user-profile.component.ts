@@ -97,6 +97,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   redirectToAddProduct() {
-    this.router.navigate(['/product/add-edit-ad/add']);
+    this.router.navigate(['/ads/add-edit-ad/add']);
   }
 }

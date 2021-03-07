@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xl-9 col-lg-9 col-md-9">
+      <app-ad-list-item
+        [ad]="ad"
+        *ngFor="
+          let ad of ads
+            | paginate
+              : {
+                  itemsPerPage: 3,
+                  currentPage: currentPage,
+                  totalItems: numberOfAds
+                }
+        "
+      ></app-ad-list-item>
+      <div class="d-flex justify-content-center mt-3">
+        <pagination-controls
+          (pageChange)="changePage($event)"
+        ></pagination-controls>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-3">
+      <app-search (searchEventEmitter)="searchAds($event)"></app-search>
+      <app-categories
+        [subcategories]="subcategories"
+        (subcategoryCheckEmitter)="subcategoryChecked($event)"
+      ></app-categories>
+    </div>
+  </div>
+</div>

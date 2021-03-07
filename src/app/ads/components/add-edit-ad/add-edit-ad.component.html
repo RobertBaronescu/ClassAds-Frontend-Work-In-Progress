@@ -45,12 +45,41 @@
                   formControlName="category"
                   id="form_city"
                   class="form-control"
+                  (change)="getSubcategories($event)"
                 >
                   <option
                     *ngFor="let category of categories"
                     [value]="category?.name"
                   >
                     {{ category?.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row form-block mb-5">
+        <div class="col-lg-4">
+          <h4>Subcategory</h4>
+        </div>
+        <div class="col-lg-7 ml-auto">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="form-label" for="form_city2">Subcategory</label>
+                <select
+                  *ngIf="subcategories"
+                  name="city"
+                  formControlName="subcategory"
+                  id="form_city2"
+                  class="form-control"
+                >
+                  <option
+                    *ngFor="let subcategory of subcategories"
+                    [value]="subcategory?.name"
+                  >
+                    {{ subcategory?.name }}
                   </option>
                 </select>
               </div>

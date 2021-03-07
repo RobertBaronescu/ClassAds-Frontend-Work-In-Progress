@@ -16,9 +16,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'product',
-    loadChildren: () =>
-      import('./products/products.module').then((m) => m.ProductsModule),
+    path: 'ads',
+    loadChildren: () => import('./ads/ads.module').then((m) => m.AdsModule),
   },
   { path: 'login', component: SignInComponent },
   { path: 'register', component: SignOutComponent },

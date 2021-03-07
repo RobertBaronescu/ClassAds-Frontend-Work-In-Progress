@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from 'src/app/interfaces/category.interface';
 import { CategoryService } from 'src/app/services/category.service';
 import { UserService } from 'src/app/services/user.service';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Ad } from 'src/app/interfaces/ad.interface';
 import { AdService } from 'src/app/services/ad.service';
 import { User } from 'src/app/interfaces/user.interface';
 import { Router } from '@angular/router';
+import { Subcategory } from 'src/app/interfaces/subcategory.interface';
 
 @Component({
   selector: 'app-add-edit-ad',
@@ -40,6 +40,7 @@ export class AddEditAdComponent implements OnInit {
   booleanArray = [false, true];
   _isEditing: boolean;
   adId: string;
+  subcategories: Subcategory[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,24 +54,28 @@ export class AddEditAdComponent implements OnInit {
       this.userService.currentUser$.subscribe((user) => {
         this.user = user;
       });
+      this.categoryService
+        .getSubcategories(this.categories[0]._id)
+        .subscribe((subcategories) => {
+          this.subcategories = [...subcategories];
+          this.addAdForm = this.formBuilder.group({
+            title: ['', Validators.required],
+            price: [null, Validators.required],
+            thumbnail: ['', Validators.required],
+            description: ['', Validators.required],
+            photos: [[]],
+
+            category: [String(this.categories[0].name)],
+
+            subcategory: [String(this.subcategories[0]?.name)],
+            sponsored: [false],
+            views: [],
+          });
+        });
     });
   }
 
-  ngOnInit(): void {
-    this.addAdForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      price: [null, Validators.required],
-      thumbnail: ['', Validators.required],
-      description: ['', Validators.required],
-      photos: [[]],
-
-      category: ['Real estate'],
-
-      subcategoryId: [' '],
-      sponsored: [false],
-      views: [],
-    });
-  }
+  ngOnInit(): void {}
 
   onThumbnailSelect(event: any) {
     const file = event.addedFiles[0];
@@ -156,6 +161,13 @@ export class AddEditAdComponent implements OnInit {
       }
     });
 
+    let foundSubcategory: Subcategory;
+    this.subcategories.forEach((element: Subcategory) => {
+      if (element.name === this.addAdForm.controls.subcategory.value) {
+        foundSubcategory = element;
+      }
+    });
+
     if (!this._isEditing) {
       const ad: Ad = {
         title: this.addAdForm.controls.title.value,
@@ -165,7 +177,7 @@ export class AddEditAdComponent implements OnInit {
         photos: this.addAdForm.controls.photos.value,
         userId: String(this.user._id),
         categoryId: foundCategory._id,
-        subcategoryId: this.addAdForm.controls.subcategoryId.value,
+        subcategoryId: foundSubcategory._id,
         sponsored: this.addAdForm.controls.sponsored.value,
         views: 0,
       };
@@ -178,6 +190,7 @@ export class AddEditAdComponent implements OnInit {
         ...this.addAdForm.value,
         userId: String(this.user._id),
         categoryId: foundCategory._id,
+        subcategoryId: foundSubcategory._id,
         _id: this.adId,
       };
       this.adService.editAd(ad).subscribe(() => {
@@ -188,5 +201,13 @@ export class AddEditAdComponent implements OnInit {
 
   onChange(value) {
     this.addAdForm.patchValue({ sponsored: value });
+  }
+
+  getSubcategories(event) {
+    this.categoryService
+      .getSubcategories(String(this.categories[event.target.selectedIndex]._id))
+      .subscribe((subcategories) => {
+        this.subcategories = [...subcategories];
+      });
   }
 }

@@ -1,0 +1,21 @@
+<div class="card">
+  <div class="card-body">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control br-tl-3 br-bl-3 search"
+        placeholder="Search"
+        #input
+        (keyup)="searchAds(input?.value)"
+      />
+      <!-- <div class="input-group-append">
+        <button
+          type="button "
+          class="btn btn-primary br-tr-3 br-br-3 search-button"
+        >
+          <i class="fas fa-search search-icon"></i>
+        </button>
+      </div> -->
+    </div>
+  </div>
+</div>

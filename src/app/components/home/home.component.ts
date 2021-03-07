@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
   }
 
   redirectToCategoryAds(categoryId: string) {
-    this.route.navigate([`/product/list/${categoryId}`]);
-
+    this.route.navigate([`/ads/list/${categoryId}`]);
   }
 }

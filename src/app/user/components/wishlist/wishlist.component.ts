@@ -45,6 +45,6 @@ export class WishlistComponent implements OnInit {
   }
 
   redirectToSingleProduct(adId: string) {
-    this.router.navigate([`/product/${adId}`]);
+    this.router.navigate([`/ads/${adId}`]);
   }
 }

@@ -25,7 +25,7 @@ export class UserAdsComponent implements OnInit {
   }
 
   redirectToAd(id: string) {
-    this.router.navigate([`/product/${id}`]);
+    this.router.navigate([`/ads/${id}`]);
   }
 
   deleteAd(adId: string) {
@@ -37,6 +37,6 @@ export class UserAdsComponent implements OnInit {
 
   redirectToEditAdd(adId: string) {
     this.adService.currentAdId$.next(adId);
-    this.router.navigate([`/product/add-edit-ad/edit/${adId}`]);
+    this.router.navigate([`/ads/add-edit-ad/edit/${adId}`]);
   }
 }
