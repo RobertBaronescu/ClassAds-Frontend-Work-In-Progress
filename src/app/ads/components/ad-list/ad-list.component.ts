@@ -1,9 +1,14 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { debounceTime, startWith, tap } from 'rxjs/operators';
+
+import { AdFilter } from 'src/app/interfaces/ad-filter.interface';
 import { Ad } from 'src/app/interfaces/ad.interface';
 import { AdsResponse } from 'src/app/interfaces/ads-response.interface';
 import { Subcategory } from 'src/app/interfaces/subcategory.interface';
+import { AdFilterQuery } from 'src/app/models/ad-filter-query.model';
 import { AdService } from 'src/app/services/ad.service';
 
 const AD_LIMIT = 3;
@@ -16,76 +21,93 @@ const AD_LIMIT = 3;
 export class AdListComponent implements OnInit {
   ads: Ad[];
   inputValue: string;
-  initialAds: Ad[];
   currentPage: number = 1;
   subcategories: Subcategory[];
   numberOfAds: number;
+  currentFilters: AdFilterQuery = new AdFilterQuery();
+  loader$: Observable<boolean> = this.adService.adsLoader$
+    .asObservable()
+    .pipe(startWith(true));
 
   constructor(private adService: AdService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     const categoryId = this.route.snapshot.paramMap.get('categoryId');
-
     this.adService
-      .getAdsByCategory(categoryId)
+      .getAdsByCategory(categoryId, this.currentFilters)
       .subscribe((response: AdsResponse) => {
         this.ads = [...response.ads];
-        this.initialAds = [...this.ads];
         this.subcategories = [...response.subcategories];
         this.numberOfAds = response.count;
       });
   }
 
-  searchAds(filterBy: string) {
-    let adsToFilter = [...this.ads];
-    this.ads = [...this.initialAds];
-    if (filterBy) {
-      filterBy = filterBy.toLocaleLowerCase();
-      adsToFilter = adsToFilter.filter((ad) =>
-        ad.title.toLocaleLowerCase().includes(filterBy)
-      );
-      this.ads = [...adsToFilter];
-    } else {
-      return this.initialAds;
-    }
+  searchAds(searchValue: string) {
+    const categoryId = this.route.snapshot.paramMap.get('categoryId');
+
+    this.currentFilters = { ...this.currentFilters, search: searchValue };
+    this.adService
+      .getAdsByCategory(categoryId, this.currentFilters)
+
+      .subscribe((repsonse: AdsResponse) => {
+        this.ads = [...repsonse.ads];
+        this.numberOfAds = repsonse.count;
+      });
   }
 
   changePage(currentPage: number) {
     const categoryId = this.route.snapshot.paramMap.get('categoryId');
     const pageOffset = (currentPage - 1) * AD_LIMIT;
+    this.currentFilters = {
+      ...this.currentFilters,
+      offset: String(pageOffset),
+    };
 
     this.adService
-      .getAdsByCategory(categoryId, pageOffset)
+      .getAdsByCategory(categoryId, this.currentFilters)
       .subscribe((response: AdsResponse) => {
         this.ads = [...response.ads];
         this.currentPage = currentPage;
       });
   }
 
-  subcategoryChecked(event) {
+  subcategoryChecked(filter: AdFilter) {
     const categoryId = this.route.snapshot.paramMap.get('categoryId');
-    const pageOffset = (this.currentPage - 1) * AD_LIMIT;
-    const foundSubcategory = this.subcategories.find(
-      (category) => category.name === event.target.value
-    );
+    const { checked, value: subcategory } = filter;
 
-    if (event.target.checked) {
-      this.adService.params.subcategories.push(String(foundSubcategory._id));
+    if (checked) {
+      this.currentFilters.subcategories.push(subcategory._id);
+
       this.adService
-        .getAdsByCategory(categoryId, pageOffset, this.adService.params)
+        .getAdsByCategory(categoryId, this.currentFilters)
         .subscribe((response: AdsResponse) => {
           this.ads = [...response.ads];
+          this.numberOfAds = response.count;
         });
     } else {
-      this.adService.params.subcategories.splice(
-        this.adService.params.subcategories.indexOf(foundSubcategory._id),
+      this.currentFilters.subcategories.splice(
+        this.currentFilters.subcategories.indexOf(subcategory._id),
         1
       );
       this.adService
-        .getAdsByCategory(categoryId, pageOffset, this.adService.params)
+        .getAdsByCategory(categoryId, this.currentFilters)
         .subscribe((response: AdsResponse) => {
           this.ads = [...response.ads];
+          this.numberOfAds = response.count;
         });
     }
+  }
+
+  priceRangeChanged(price) {
+    const categoryId = this.route.snapshot.paramMap.get('categoryId');
+
+    this.currentFilters = { ...this.currentFilters, price: price };
+    this.adService
+      .getAdsByCategory(categoryId, this.currentFilters)
+
+      .subscribe((response) => {
+        this.ads = [...response.ads];
+        this.numberOfAds = response.count;
+      });
   }
 }

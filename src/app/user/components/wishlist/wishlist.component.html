@@ -25,8 +25,17 @@
             <span>{{ product?.price | currency }}</span>
           </div>
 
-          <div>
-            <i class="fas fa-times close-card" (click)="closeCard(product)"></i>
+          <div class="times">
+            <div (click)="closeCard(product)">
+              <a class="close-card">
+                <span class="left">
+             
+                </span>
+                <span class="right">
+              
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </div>

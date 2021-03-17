@@ -9,10 +9,12 @@ import { AddAdComponent } from './components/add-ad/add-ad.component';
 import { AddEditAdComponent } from './components/add-edit-ad/add-edit-ad.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SearchComponent } from './components/search/search.component';
-import { CategoriesComponent } from './components/categories/categories.component';
+import { SearchComponent } from './components/ad-search-filter/ad-search-filter.component';
+import { CategoriesComponent } from './components/ad-subcategories-filter/ad-subcategories-filter.component';
 import { SearchPipe } from './pipes/search.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PriceFilterComponent } from './components/price-filter/price-filter.component';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SearchComponent,
     CategoriesComponent,
     SearchPipe,
+    PriceFilterComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +36,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
+    NgxSliderModule,
   ],
 })
 export class AdsModule {}

@@ -30,16 +30,109 @@
   font-weight: bolder;
 }
 
-.close-card {
-  opacity: 1;
-  &:hover {
-    opacity: 0.7;
-    cursor: pointer;
-    transition: 0.3s all ease-in;
-  }
-}
-
 .product-image:hover {
   cursor: pointer;
   transition: all ease-in 0.3s;
+}
+
+@mixin transition() {
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+div {
+  a {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    right: 6px;
+    top: 19px;
+    margin-top: -50px;
+    margin-right: -50px;
+
+    border-radius: 50px;
+    opacity: 1;
+
+    & > span {
+      background-color: #6e00ff;
+      display: block;
+      height: 12px;
+      border-radius: 6px;
+      position: relative;
+      @include transition();
+      position: absolute;
+      top: 50%;
+      margin-top: -6px;
+      left: 18px;
+      width: 35px;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-justify-content: space-between;
+      justify-content: space-between;
+      -moz-justify-content: space-between;
+      -ms-justify-content: space-between;
+
+      span {
+        display: block;
+        background-color: #ed7f00;
+        width: 12px;
+        height: 12px;
+        border-radius: 6px;
+        @include transition();
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      &.left {
+        transform: rotate(45deg);
+        transform-origin: center;
+      }
+
+      &.right {
+        transform: rotate(-45deg);
+        transform-origin: center;
+      }
+    }
+
+    &:hover {
+      & > span {
+        background-color: #bb00ff;
+        cursor: pointer;
+        @include transition();
+
+        span {
+          @include transition();
+          cursor: pointer;
+          background-color: #bb00ff;
+        }
+
+        &.left {
+          .circle-left {
+            @include transition();
+            margin-left: 52px;
+          }
+
+          .circle-right {
+            @include transition();
+            margin-left: 0;
+          }
+        }
+
+        &.right {
+          .circle-left {
+            @include transition();
+            margin-left: 52px;
+          }
+
+          .circle-right {
+            @include transition();
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
 }

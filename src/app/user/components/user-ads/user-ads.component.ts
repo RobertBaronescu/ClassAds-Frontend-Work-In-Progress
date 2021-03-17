@@ -10,6 +10,7 @@ import { AdService } from 'src/app/services/ad.service';
 })
 export class UserAdsComponent implements OnInit {
   userAds: Ad[];
+ 
 
   constructor(
     private adService: AdService,
@@ -28,11 +29,12 @@ export class UserAdsComponent implements OnInit {
     this.router.navigate([`/ads/${id}`]);
   }
 
-  deleteAd(adId: string) {
-    this.adService.deleteAd(adId).subscribe(() => {
-      const foundAd = this.userAds.find((ad) => ad._id === adId);
-      this.userAds.splice(this.userAds.indexOf(foundAd), 1);
-    });
+  deleteAd(ad: Ad) {
+    // this.adService.deleteAd(adId).subscribe(() => {
+    //   const foundAd = this.userAds.find((ad) => ad._id === adId);
+    //   this.userAds.splice(this.userAds.indexOf(foundAd), 1);
+    // });
+   
   }
 
   redirectToEditAdd(adId: string) {

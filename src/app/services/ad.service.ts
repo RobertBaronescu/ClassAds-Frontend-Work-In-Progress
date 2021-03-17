@@ -1,17 +1,18 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { finalize, startWith, tap } from 'rxjs/operators';
 import { Ad } from '../interfaces/ad.interface';
 import { AdsResponse } from '../interfaces/ads-response.interface';
-import { Category } from '../interfaces/category.interface';
+import { AdFilterQuery } from '../models/ad-filter-query.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdService {
   currentAdId$ = new BehaviorSubject<string>(null);
-  params = { offset: '', ids: [], subcategories: [] };
+  adsLoader$ = new Subject<boolean>();
+  currentAd$ = new BehaviorSubject<Ad>(null);
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -23,16 +24,18 @@ export class AdService {
 
   getAdsByCategory(
     categoryId: string,
-    pageOffset: number = 0,
-    params?: any
+    filters: AdFilterQuery
   ): Observable<AdsResponse> {
-    this.params.offset = String(pageOffset);
-    this.params.ids = ['1', '2'];
+    const queryParams = { ...filters };
 
-    return this.http.get<AdsResponse>(
-      `http://localhost:3000/ads/${categoryId}`,
-      { params: this.params }
-    );
+    return this.http
+      .get<AdsResponse>(`http://localhost:3000/ads/${categoryId}`, {
+        params: queryParams,
+      })
+      .pipe(
+        tap(() => this.showAdsLoader()),
+        finalize(() => this.hideAdsLoader())
+      );
   }
 
   getAdsByUser(userId: string): Observable<Ad[]> {
@@ -75,5 +78,13 @@ export class AdService {
     return this.http.get<Ad[]>(
       `http://localhost:3000/user/getWishlist/${userId}`
     );
+  }
+
+  private showAdsLoader() {
+    this.adsLoader$.next(true);
+  }
+
+  private hideAdsLoader() {
+    this.adsLoader$.next(false);
   }
 }

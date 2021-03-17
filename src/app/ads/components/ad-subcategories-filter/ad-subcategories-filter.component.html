@@ -12,7 +12,7 @@
             class="custom-control-input"
             name="checkbox1"
             [value]="subcategory?.name"
-            (change)="checkSubcategory($event)"
+            (change)="checkSubcategory($event, subcategory)"
           />
           <span class="custom-control-label">
             <a href="#" class="text-dark">{{ subcategory?.name }}</a>
@@ -21,8 +21,5 @@
       </div>
     </div>
   </div>
-  <div class="card-header border-top">
-    <h3 class="card-title">Price Range</h3>
-  </div>
-  <div class="card-body"></div>
+
 </div>

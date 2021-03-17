@@ -11,16 +11,7 @@ img {
 
 .ad-price {
   font-size: medium;
-}
-
-.fa-heart-o {
-  color: #bb00ff;
-
-  &:hover {
-    cursor: pointer;
-    color: blue;
-    transition: all ease-in 0.3s;
-  }
+  font-weight: bold;
 }
 
 .card:hover {
@@ -30,6 +21,10 @@ img {
   box-shadow: 0 1rem 3rem rgba(31, 45, 61, 0.125) !important;
 }
 
-.isInWishlist {
-  color: red;
+.fa-heart {
+  color: #bb00ff;
+}
+
+.card-footer {
+  background-color: transparent !important;
 }

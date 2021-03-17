@@ -11,6 +11,9 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignOutComponent } from './components/sign-out/sign-out.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { LoaderComponent } from './components/loader/loader.component';
+import { LoaderInterceptor } from './shared/loader.interceptor';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     UserIconComponent,
     SignInComponent,
     SignOutComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,10 +32,15 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    
+    SharedModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
