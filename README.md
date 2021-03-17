@@ -1,31 +1,13 @@
-<<<<<<< HEAD
-# ClassAds
+link to the backend for the booking app: https://github.com/RobertBaronescu/Booking-App-Backend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.4.
+![Homepage](https://github.com/RobertBaronescu/ClassAds-Backend-Work-In-Progress/blob/ec11060eda9306b7cda6964715e054181ab9b278/photos/app/Homepage.PNG)
 
-## Development server
+![Categories](https://github.com/RobertBaronescu/ClassAds-Backend-Work-In-Progress/blob/ec11060eda9306b7cda6964715e054181ab9b278/photos/app/Categories.PNG)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+![Category-list](https://github.com/RobertBaronescu/ClassAds-Backend-Work-In-Progress/blob/ec11060eda9306b7cda6964715e054181ab9b278/photos/app/Category%20list.PNG)
 
-## Code scaffolding
+![Single-ad](https://github.com/RobertBaronescu/ClassAds-Backend-Work-In-Progress/blob/ec11060eda9306b7cda6964715e054181ab9b278/photos/app/Single%20ad.PNG)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![Login](https://github.com/RobertBaronescu/ClassAds-Backend-Work-In-Progress/blob/ec11060eda9306b7cda6964715e054181ab9b278/photos/app/Login.PNG)
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-=======
-# ClassAds-Frontend
->>>>>>> 4741d6a5b7f61396b9d984e5f24f7daf28ce3953
+![Register](https://github.com/RobertBaronescu/ClassAds-Backend-Work-In-Progress/blob/ec11060eda9306b7cda6964715e054181ab9b278/photos/app/Register.PNG)
